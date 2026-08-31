@@ -1,0 +1,7 @@
+PRETTY_NAME="ccLinux 6.12 (CC: Tweaked)"
+NAME="ccLinux"
+VERSION="6.12"
+ID=cclinux
+VERSION_ID="6.12"
+HOME_URL="https://tweaked.cc"
+ANSI_COLOR="1;34"

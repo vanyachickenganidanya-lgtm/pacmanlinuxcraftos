@@ -1,0 +1,7 @@
+
+Welcome to ccLinux 6.12 (GNU/Linux 6.12.0-cclinux)
+
+ * Documentation:  help
+ * Kernel panic:   panic   or   echo c > /proc/sysrq-trigger
+ * Poweroff:       poweroff    Reboot: reboot
+ * CraftOS files:  /mnt/craftos
