@@ -1,0 +1,14 @@
+---
+description: Visual identity — pixel type, Shizuku switches, 16×16 assets
+globs: **/*.{html,css,scss,js,tsx,jsx,vue,md}
+alwaysApply: true
+---
+
+Follow `DESIGN.md` at the repo root.
+
+Brand: Shizuku on a ComputerCraft monitor.
+
+- Pixel fonts (Pixelify Sans / Monocraft / Unbounded), sizes 12/16/24/32/48/64
+- Material 3 switches 52×32, phosphor `#C8F542` when ON, preference rows like Android Settings
+- 16×16 icons, nearest-neighbor; recreate Minecraft blocks; no Mojang files in git
+- No Inter, no serif, no iOS toggles, no rainbow, no liquid metal
