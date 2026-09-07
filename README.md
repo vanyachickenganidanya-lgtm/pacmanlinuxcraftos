@@ -7,6 +7,10 @@
 Без GUI — только терминал: GRUB, «ядро» с dmesg/sysrq/panic, systemd-лог,
 bash-подобная оболочка, `/proc`, `/sys`, `/dev`, pacman, neofetch, FreeDOS, Memtest86+.
 
+Визуальный закон для людей и агентов: [`DESIGN.md`](DESIGN.md) (токены + do/don't),
+брендбук — [`brand/index.html`](brand/index.html). Скелеты UI — с [21st.dev](https://21st.dev),
+дисциплина — с [Refero Styles](https://styles.refero.design).
+
 ## Структура репозитория
 
 ```

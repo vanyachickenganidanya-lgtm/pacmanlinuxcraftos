@@ -1,0 +1,12 @@
+---
+description: ccLinux visual identity — always apply DESIGN.md
+globs: **/*.{html,css,scss,js,tsx,jsx,vue,md}
+alwaysApply: true
+---
+
+Follow `DESIGN.md` at the repo root for any visual work.
+
+- Canvas `#080A09`, phosphor CTA `#C8F542` once per view
+- Instrument Serif 400 for display; IBM Plex Mono for UI/body
+- No weight 600+, no UI gradients, no Inter, no rainbow, no liquid metal
+- Steal skeletons from 21st.dev (ASCII/terminal) and discipline from Refero Linear/Monad — never their palettes

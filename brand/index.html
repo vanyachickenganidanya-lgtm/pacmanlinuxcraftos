@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ccLinux — Brand Book for humans & agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void: #080A09;
+      --chassis: #101412;
+      --panel: #171C19;
+      --rule: #2A332E;
+      --dim: #6E7B73;
+      --mist: #C5CEC4;
+      --paper: #E8EADC;
+      --phosphor: #C8F542;
+      --amber: #FFB020;
+      --panic: #FF3B4E;
+      --cyan: #3EE0C8;
+      --font-display: "Instrument Serif", Georgia, serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+      --r-hair: 2px;
+      --r-sm: 6px;
+      --r-md: 12px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--mist);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { color: var(--phosphor); }
+
+    .scan {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.045) 3px
+      );
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      border-right: 1px solid var(--rule);
+      background: var(--void);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      z-index: 10;
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--paper);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .mark svg { display: block; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-list a {
+      color: var(--dim);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+      padding: 6px 0;
+    }
+    .nav-list a:hover, .nav-list a.active { color: var(--phosphor); }
+    .nav-foot { margin-top: auto; color: var(--dim); font-size: 11px; line-height: 1.5; }
+
+    main { min-width: 0; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 48px 56px 72px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      color: #1a241c;
+      font-size: 11px;
+      line-height: 1.45;
+      white-space: pre;
+      overflow: hidden;
+      padding: 24px 28px;
+      user-select: none;
+    }
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,10,9,0.35) 0%, rgba(8,10,9,0.92) 55%, var(--void) 100%);
+    }
+    .hero-top, .hero-mid, .hero-bot { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--phosphor);
+    }
+    .eyebrow.dim { color: var(--dim); }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(64px, 10vw, 112px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--paper);
+      margin: 16px 0 20px;
+    }
+    .lede {
+      max-width: 640px;
+      font-size: 15px;
+      color: var(--mist);
+    }
+    .lede em { font-style: italic; font-family: var(--font-display); font-size: 22px; color: var(--paper); letter-spacing: -0.02em; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px 40px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 500;
+    }
+    .hero-meta b { color: var(--paper); font-weight: 500; }
+    .caret {
+      display: inline-block;
+      width: 9px;
+      height: 1.05em;
+      background: var(--phosphor);
+      box-shadow: 0 0 18px rgba(200,245,66,0.45);
+      animation: blink 1.1s step-end infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    section.block {
+      padding: 96px 56px;
+      border-bottom: 1px solid var(--rule);
+      max-width: calc(var(--max) + 112px);
+    }
+    .kicker {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+    }
+    h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 28px;
+      letter-spacing: -0.015em;
+      color: var(--paper);
+      margin: 36px 0 12px;
+    }
+    p.prose { max-width: 68ch; }
+    p + p { margin-top: 12px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+
+    .card {
+      background: var(--chassis);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 24px;
+    }
+    .card h3 { margin-top: 0; font-size: 28px; }
+    .card .n {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 28px; }
+    .swatch {
+      border: 1px solid var(--rule);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      background: var(--chassis);
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      width: 100%;
+    }
+    .swatch:hover { border-color: var(--mist); }
+    .chip { height: 88px; }
+    .swatch fig { display: block; }
+    .meta { padding: 10px 12px 12px; }
+    .meta .name { color: var(--paper); font-size: 13px; font-weight: 500; }
+    .meta .hex { color: var(--dim); font-size: 11px; letter-spacing: 0.06em; margin-top: 2px; }
+    .meta .role { color: var(--dim); font-size: 11px; margin-top: 8px; line-height: 1.4; }
+
+    .type-row {
+      border-top: 1px solid var(--rule);
+      padding: 22px 0;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      align-items: end;
+    }
+    .type-row .spec { color: var(--dim); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+    .t-cover { font-family: var(--font-display); font-size: 72px; line-height: 0.95; letter-spacing: -0.03em; color: var(--paper); }
+    .t-h { font-family: var(--font-display); font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; color: var(--paper); }
+    .t-hs { font-family: var(--font-display); font-size: 28px; color: var(--paper); }
+    .t-body { font-size: 15px; }
+    .t-ui { font-size: 13px; }
+    .t-eye { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--phosphor); }
+
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+    button.btn, a.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: var(--r-sm);
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      line-height: 1.3;
+      text-decoration: none;
+    }
+    .btn-ph {
+      background: var(--phosphor);
+      color: var(--void);
+      box-shadow: 0 0 24px rgba(200,245,66,0.25);
+    }
+    .btn-ph:hover { filter: brightness(1.06); color: var(--void); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--mist);
+      border-color: var(--rule);
+    }
+    .btn-ghost:hover { background: var(--panel); color: var(--paper); }
+    .btn-panic { background: var(--panic); color: var(--paper); }
+    .btn-amber { background: var(--amber); color: var(--void); }
+
+    .term {
+      background: var(--chassis);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .term-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--dim);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .dots { display: flex; gap: 6px; }
+    .dot { width: 8px; height: 8px; border-radius: 99px; background: var(--rule); }
+    .term-body {
+      padding: 18px 18px 22px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--mist);
+    }
+    .prompt { color: var(--phosphor); }
+    .info { color: var(--cyan); }
+    .warn { color: var(--amber); }
+    .err { color: var(--panic); }
+
+    .grub {
+      background: var(--chassis);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      padding: 18px;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+    .grub-row {
+      padding: 8px 12px;
+      border-radius: var(--r-hair);
+      color: var(--mist);
+    }
+    .grub-row.on {
+      background: var(--phosphor);
+      color: var(--void);
+      font-weight: 500;
+    }
+
+    .logo-row { display: flex; gap: 16px; align-items: stretch; margin-top: 24px; }
+    .logo-tile {
+      flex: 1;
+      border: 1px solid var(--rule);
+      border-radius: var(--r-md);
+      background: var(--chassis);
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--paper);
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .logo-tile.inv { background: var(--phosphor); color: var(--void); border-color: var(--phosphor); }
+    .logo-tile.paper { background: var(--paper); color: var(--void); border-color: var(--paper); }
+
+    .do, .dont {
+      border-radius: var(--r-md);
+      padding: 22px 24px;
+      border: 1px solid var(--rule);
+    }
+    .do { background: #101612; }
+    .dont { background: #140c0e; }
+    .do h3, .dont h3 { margin: 0 0 12px; font-size: 28px; }
+    .do li, .dont li { margin-left: 18px; margin-top: 8px; }
+    .do .n { color: var(--phosphor); }
+    .dont .n { color: var(--panic); }
+
+    pre.prompt-box {
+      margin-top: 20px;
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-sm);
+      padding: 18px 20px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--paper);
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    th { color: var(--dim); font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+    td code, p code, li code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--panel);
+      padding: 1px 5px;
+      border-radius: var(--r-hair);
+      color: var(--paper);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--phosphor);
+      color: var(--void);
+      padding: 10px 14px;
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: 160ms ease;
+      z-index: 40;
+    }
+    .toast.show { opacity: 1; transform: none; }
+
+    footer.block { color: var(--dim); font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .hero, section.block, footer.block { padding: 48px 22px; }
+      .grid-2, .grid-3, .grid-4, .swatches { grid-template-columns: 1fr 1fr; }
+      .type-row { grid-template-columns: 1fr; gap: 8px; }
+      .logo-row { flex-direction: column; }
+      h1 { font-size: 64px; }
+    }
+    @media (max-width: 560px) {
+      .grid-2, .grid-3, .grid-4, .swatches { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scan" aria-hidden="true"></div>
+  <div class="shell">
+    <nav>
+      <div class="mark">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="10" stroke="#C8F542" stroke-width="1.5"/>
+          <path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#080A09"/>
+          <rect x="16" y="9.2" width="2.2" height="3.6" fill="#C8F542"/>
+        </svg>
+        ccLinux
+      </div>
+      <ul class="nav-list">
+        <li><a href="#cover">00 Cover</a></li>
+        <li><a href="#agents">01 For agents</a></li>
+        <li><a href="#dna">02 DNA</a></li>
+        <li><a href="#color">03 Color</a></li>
+        <li><a href="#type">04 Type</a></li>
+        <li><a href="#mark">05 Mark</a></li>
+        <li><a href="#ui">06 Components</a></li>
+        <li><a href="#voice">07 Voice</a></li>
+        <li><a href="#law">08 Do / Don't</a></li>
+        <li><a href="#steal">09 21st + Refero</a></li>
+        <li><a href="#prompt">10 Prompt</a></li>
+      </ul>
+      <div class="nav-foot">
+        DESIGN.md is the contract.<br />
+        This page is the proof.
+      </div>
+    </nav>
+
+    <main>
+      <header class="hero" id="cover">
+        <div class="hero-bg" aria-hidden="true">[    0.000000] ccLinux 0.9.4-arch (tty1)
+[    0.000012] Command line: BOOT_IMAGE=/linux/boot.lua root=/dev/craftos
+[    0.000184] BIOS-provided physical RAM map:
+[    0.000201]  0x00000000-0x0009ffff : usable
+[    0.000418] Kernel command line: quiet splash phosphor=1
+[    0.001102] CPU: ComputerCraft Lua 5.2 (CC: Tweaked)
+[    0.002441] Memory: 256K/256K available
+[    0.004880] GRUB 2.12 — ccLinux | Arch | Debian | FreeDOS | Memtest86+ | CraftOS
+[    0.008120] systemd[1]: Starting Getty on tty1...
+[    0.011004] pacman: syncing extra from github.com/vanyachickenganidanya-lgtm
+[    0.014440] rootfs: FHS mounted at /linux/rootfs
+[    0.018002] /proc /sys /dev /mnt/craftos online
+[    0.021110] dmesg: no GUI found (this is a feature)
+[    0.024008] neofetch: Arch-shaped lie detected, continuing
+[    0.028440] login: root
+[    0.028512] Last login: never, from a diamond computer
+root@ccLinux:~# uname -a
+ccLinux 0.9.4-arch #1 SMP PREEMPT CraftOS-PC i686 GNU/Linux
+root@ccLinux:~# pacman -Syu
+:: Synchronizing package databases...
+ extra                  156.4 KiB  1.21M/s
+:: Starting full system upgrade...
+ there is nothing to do
+root@ccLinux:~#</div>
+        <div class="hero-top">
+          <div class="eyebrow">00 — Brand book · DESIGN.md rendered</div>
+        </div>
+        <div class="hero-mid">
+          <h1>ccLinux</h1>
+          <p class="lede">
+            <em>phosphor receipt from a kernel that thinks it's Arch.</em><br /><br />
+            Брендбук, который читают нейросети: токены, роли, do/don't и откуда воровать скелеты.
+            Люди смотрят эту страницу. Агенты читают <code>DESIGN.md</code>.<span class="caret"></span>
+          </p>
+        </div>
+        <div class="hero-bot hero-meta">
+          <div>Theme <b>dark TTY</b></div>
+          <div>Accent <b>#C8F542 ×1</b></div>
+          <div>Type <b>Instrument Serif + IBM Plex Mono</b></div>
+          <div>Weight cap <b>500</b></div>
+        </div>
+      </header>
+
+      <section class="block" id="agents">
+        <div class="kicker"><span class="eyebrow">01 — For agents</span></div>
+        <h2>Как сделать так, чтобы нейросеть поняла стиль</h2>
+        <p class="prose">Картинка в Figma нейросети почти бесполезна. Ей нужен контракт: точные hex, роли («этот цвет только для CTA»), запреты и скелеты компонентов. Формат, который сейчас едят Cursor / Claude Code / Codex / v0 — это <strong style="color:var(--paper);font-weight:500">DESIGN.md</strong> в корне репо, как на <a href="https://styles.refero.design" target="_blank" rel="noopener">styles.refero.design</a>.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="n">1. Файл-закон</div>
+            <h3>DESIGN.md</h3>
+            <p>YAML-токены сверху, проза снизу. Одна атмосфера-строка. У каждого цвета — работа, не просто имя. Лежит в корне — агент подхватывает сам.</p>
+          </article>
+          <article class="card">
+            <div class="n">2. Запреты важнее вкуса</div>
+            <h3>Don't</h3>
+            <p>Без списка Don't агент включит Inter, градиент и «AI purple». Запрет — самый дешёвый способ держать стиль.</p>
+          </article>
+          <article class="card">
+            <div class="n">3. Откуда брать мясо</div>
+            <h3>Steal list</h3>
+            <p>Разреши 21st.dev на скелеты (ASCII, terminal). Refero — на дисциплину (Linear / Monad). Запрети палитры и rainbow-кнопки.</p>
+          </article>
+        </div>
+        <p class="prose" style="margin-top:28px">В этом репо уже лежит вся цепочка: <code>DESIGN.md</code> → <code>AGENTS.md</code> → <code>.cursor/rules/design.mdc</code> → эта страница. Промпт агенту: «strictly follow DESIGN.md».</p>
+      </section>
+
+      <section class="block" id="dna">
+        <div class="kicker"><span class="eyebrow">02 — DNA</span></div>
+        <h2>Три столпа, не четыре</h2>
+        <div class="grid-3">
+          <article class="card">
+            <div class="n">TTY truth</div>
+            <h3>Это терминал.</h3>
+            <p>Нет GUI, нет иконок-в-кружках, нет «feature grid» как у SaaS. Продуктовый кадр — окно GRUB / dmesg / pacman.</p>
+          </article>
+          <article class="card">
+            <div class="n">One flashlight</div>
+            <h3>Один фосфор.</h3>
+            <p>Как acid-lime у Linear на Refero: <code>#C8F542</code> зажигает одно действие на экран. Остальное — тёплый монохром.</p>
+          </article>
+          <article class="card">
+            <div class="n">Editorial silence</div>
+            <h3>Серриф шепчет.</h3>
+            <p>Как Monad: заголовки Instrument Serif 400, весь UI — моно. Жирный шрифт запрещён. Контраст делает гарнитура.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="block" id="color">
+        <div class="kicker"><span class="eyebrow">03 — Color</span></div>
+        <h2>Палитра с должностями</h2>
+        <p class="prose">Клик копирует hex. Агенту нужны не «зелёный и чёрный», а роли. Phosphor — фонарик. Amber — предупреждение. Panic — смерть процесса. Cyan — dmesg info.</p>
+        <div class="swatches">
+          <button class="swatch" data-hex="#080A09"><div class="chip" style="background:#080A09;border-bottom:1px solid #2A332E"></div><div class="meta"><div class="name">Void</div><div class="hex">#080A09</div><div class="role">Холст. Чуть зелёный, не #000.</div></div></button>
+          <button class="swatch" data-hex="#101412"><div class="chip" style="background:#101412"></div><div class="meta"><div class="name">Chassis</div><div class="hex">#101412</div><div class="role">Карточки, хром терминала.</div></div></button>
+          <button class="swatch" data-hex="#171C19"><div class="chip" style="background:#171C19"></div><div class="meta"><div class="name">Panel</div><div class="hex">#171C19</div><div class="role">Инпуты, вложенные колодцы.</div></div></button>
+          <button class="swatch" data-hex="#2A332E"><div class="chip" style="background:#2A332E"></div><div class="meta"><div class="name">Rule</div><div class="hex">#2A332E</div><div class="role">1px границы вместо теней.</div></div></button>
+          <button class="swatch" data-hex="#6E7B73"><div class="chip" style="background:#6E7B73"></div><div class="meta"><div class="name">Dim</div><div class="hex">#6E7B73</div><div class="role">Вторичный текст, idle.</div></div></button>
+          <button class="swatch" data-hex="#C5CEC4"><div class="chip" style="background:#C5CEC4"></div><div class="meta"><div class="name">Mist</div><div class="hex">#C5CEC4</div><div class="role">Основной набор на void.</div></div></button>
+          <button class="swatch" data-hex="#E8EADC"><div class="chip" style="background:#E8EADC"></div><div class="meta"><div class="name">Paper</div><div class="hex">#E8EADC</div><div class="role">Заголовки. Тёплый, не #fff.</div></div></button>
+          <button class="swatch" data-hex="#C8F542"><div class="chip" style="background:#C8F542"></div><div class="meta"><div class="name">Phosphor</div><div class="hex">#C8F542</div><div class="role">Единственный CTA / GRUB select.</div></div></button>
+          <button class="swatch" data-hex="#FFB020"><div class="chip" style="background:#FFB020"></div><div class="meta"><div class="name">Amber</div><div class="hex">#FFB020</div><div class="role">Warn. Никогда не кнопка «далее».</div></div></button>
+          <button class="swatch" data-hex="#FF3B4E"><div class="chip" style="background:#FF3B4E"></div><div class="meta"><div class="name">Panic</div><div class="hex">#FF3B4E</div><div class="role">uninstall / oops / destroy.</div></div></button>
+          <button class="swatch" data-hex="#3EE0C8"><div class="chip" style="background:#3EE0C8"></div><div class="meta"><div class="name">Cyan</div><div class="hex">#3EE0C8</div><div class="role">Ссылки, info-строки dmesg.</div></div></button>
+        </div>
+      </section>
+
+      <section class="block" id="type">
+        <div class="kicker"><span class="eyebrow">04 — Type</span></div>
+        <h2>Две семьи. Третьей нет.</h2>
+        <div class="type-row"><div class="spec">Cover 96 · serif 400</div><div class="t-cover">uname -a</div></div>
+        <div class="type-row"><div class="spec">Display 72 · −0.03em</div><div class="t-cover" style="font-size:56px">kernel panic</div></div>
+        <div class="type-row"><div class="spec">Heading 40</div><div class="t-h">GNU/Linux for a computer that isn't real</div></div>
+        <div class="type-row"><div class="spec">Heading-sm 28</div><div class="t-hs">pacman -Syu && reboot</div></div>
+        <div class="type-row"><div class="spec">Body 15 / 400 / 1.6</div><div class="t-body">Репозиторий содержит код ccLinux — TTY-системы для CC: Tweaked. Без GUI. GRUB, dmesg, pacman, bash.</div></div>
+        <div class="type-row"><div class="spec">UI 13 / 500</div><div class="t-ui">install auto · recovery · FreeDOS 1.3</div></div>
+        <div class="type-row"><div class="spec">Eyebrow 11 / 0.12em</div><div class="t-eye">05 — Mark · never steve</div></div>
+      </section>
+
+      <section class="block" id="mark">
+        <div class="kicker"><span class="eyebrow">05 — Mark</span></div>
+        <h2>Клин и курсор, не Тикс</h2>
+        <p class="prose">Знак — круг с вырезанным клином (pacman) и блочный курсор. Без глаз, без меха, без крипера. Слово — <code>ccLinux</code>, camel c, моно 500.</p>
+        <div class="logo-row">
+          <div class="logo-tile">
+            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#C8F542" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#101412"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#C8F542"/></svg>
+            ccLinux
+          </div>
+          <div class="logo-tile inv">
+            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#080A09" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#C8F542"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#080A09"/></svg>
+            ccLinux
+          </div>
+          <div class="logo-tile paper">
+            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#080A09" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#E8EADC"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#080A09"/></svg>
+            ccLinux
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="ui">
+        <div class="kicker"><span class="eyebrow">06 — Components</span></div>
+        <h2>Скелет с 21st, покраска наша</h2>
+        <p class="prose">Кнопки 6px, карточки 12px, бейджи 2px. Пилюли 9999 — только для точек. Один фосфорный CTA на вид.</p>
+        <div class="btns">
+          <button class="btn btn-ph">pacman -Syu</button>
+          <button class="btn btn-ghost">man pacman</button>
+          <button class="btn btn-panic">panic</button>
+          <span class="btn btn-ghost" style="padding:4px 8px;font-size:11px;border-radius:2px">kbd Ctrl+T</span>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+            root@ccLinux: / — tty1
+          </div>
+          <div class="term-body">
+            <div><span class="prompt">root@ccLinux:~#</span> uname -r</div>
+            <div>0.9.4-arch</div>
+            <div><span class="prompt">root@ccLinux:~#</span> dmesg | tail -3</div>
+            <div class="info">[  12.440] info: pacman mirror online</div>
+            <div class="warn">[  12.441] warn: http fallback to builtin extra</div>
+            <div class="err">[  12.890] oops: cow says moo in kernel space (system lives)</div>
+            <div><span class="prompt">root@ccLinux:~#</span> <span class="caret"></span></div>
+          </div>
+        </div>
+
+        <h3>GRUB — highlight primitive</h3>
+        <p class="prose">Выбранный ряд = фосфорная заливка. Это же состояние для active nav и selected list.</p>
+        <div class="grub">
+          <div class="grub-row on">ccLinux</div>
+          <div class="grub-row">Arch Linux</div>
+          <div class="grub-row">Debian GNU/Linux 12</div>
+          <div class="grub-row">recovery</div>
+          <div class="grub-row">FreeDOS 1.3</div>
+          <div class="grub-row">Memtest86+</div>
+          <div class="grub-row">CraftOS</div>
+        </div>
+      </section>
+
+      <section class="block" id="voice">
+        <div class="kicker"><span class="eyebrow">07 — Voice</span></div>
+        <h2>Как man-page, не как лендинг</h2>
+        <div class="grid-2">
+          <article class="card">
+            <div class="n">Do say</div>
+            <p>«Без GUI — только терминал.»<br />«install auto — установка и ребут в GRUB.»<br />«Если http недоступен — встроенный extra.»</p>
+          </article>
+          <article class="card">
+            <div class="n">Don't say</div>
+            <p>«Unlock your Linux potential.»<br />«Reimagine crafting.»<br />«Seamless next-gen OS experience.»</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="block" id="law">
+        <div class="kicker"><span class="eyebrow">08 — Law</span></div>
+        <h2>Это читает модель первым</h2>
+        <div class="grid-2">
+          <div class="do">
+            <div class="n">Do</div>
+            <h3>Делай</h3>
+            <ul>
+              <li>Instrument Serif 400 на заголовки, IBM Plex Mono на всё остальное</li>
+              <li>Один фосфорный CTA на экран</li>
+              <li>Границы 1px Rule, не тени</li>
+              <li>Сетка 4 / 8 / 16 / 24 / 96</li>
+              <li>Eyebrow <code>01 — NAME</code> перед серриф-заголовком</li>
+              <li>Hero начинать с ASCII/terminal скелета</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <div class="n">Don't</div>
+            <h3>Не делай</h3>
+            <ul>
+              <li>Inter, Roboto, вес 600+</li>
+              <li>Градиенты на кнопках и заголовках</li>
+              <li>Пилюли-кнопки, rainbow, liquid metal</li>
+              <li>Чистое #000 / #fff холстом</li>
+              <li>Стив, крипер, клипарт-Тикс как лого</li>
+              <li>«AI purple» #8b5cf6 и второй цветной fill</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="steal">
+        <div class="kicker"><span class="eyebrow">09 — Steal list</span></div>
+        <h2>Заходи, бери скелет, перекрась</h2>
+        <p class="prose">Агенту нельзя «вдохновляться вообще». Ему нужен белый список URL и чёрный список приёмов. Иначе он стащит rainbow-button с 21st и назовёт это брендом.</p>
+        <table>
+          <thead>
+            <tr><th>Источник</th><th>Брать</th><th>Не брать</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a></td>
+              <td>ASCII hero, terminal chrome, тёмные компактные карточки, hover-preview, hairline grids. Пример: <a href="https://21st.dev/@larsen66/components/hero-ascii-one" target="_blank" rel="noopener">Hero ASCII one</a></td>
+              <td>Rainbow borders, liquid metal, цветные градиент-CTA, 3D candy, glassmorphism</td>
+            </tr>
+            <tr>
+              <td><a href="https://styles.refero.design" target="_blank" rel="noopener">Refero Styles</a></td>
+              <td>Метод DESIGN.md. <a href="https://styles.refero.design/style/90ce5883-bb24-4466-93f7-801cd617b0d1" target="_blank" rel="noopener">Linear</a> — один акцент на midnight. <a href="https://styles.refero.design/style/fc84e9f0-2058-4a0a-8d26-9cc1ba84ec9c" target="_blank" rel="noopener">Monad</a> — serif 400 + mono UI</td>
+              <td>Их hex, Inter, пергамент Monad, acid-lime Linear <code>#e4f222</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="block" id="prompt">
+        <div class="kicker"><span class="eyebrow">10 — Agent prompt</span></div>
+        <h2>Вставь это в Cursor / Claude</h2>
+        <p class="prose">Плюс <code>@DESIGN.md</code>. Без файла промпт держится одну сессию. С файлом в корне — весь проект.</p>
+        <div class="btns">
+          <button class="btn btn-ph" id="copy-prompt" type="button">Copy prompt</button>
+          <a class="btn btn-ghost" href="../DESIGN.md">Open DESIGN.md</a>
+        </div>
+        <pre class="prompt-box" id="agent-prompt">Read DESIGN.md at the repo root and follow it strictly.
+
+Visual contract:
+- Canvas #080A09, surfaces #101412 / #171C19, hairline #2A332E
+- Display: Instrument Serif 400. UI/body: IBM Plex Mono 400/500
+- One phosphor CTA #C8F542 on #080A09 per view
+- No weight 600+, no gradients on UI, no Inter, no rainbow, no liquid metal
+
+If you need a component skeleton, take structure from 21st.dev
+(ASCII hero, terminal window, dark compact cards) and restyle
+every color/font/radius to DESIGN.md tokens.
+
+If you need a taste reference, Linear + Monad on styles.refero.design
+are the method, not the palette.</pre>
+      </section>
+
+      <footer class="block">
+        ccLinux brand book · tokens in DESIGN.md · skeletons from 21st.dev · discipline from Refero.<br />
+        Phosphor is a flashlight, not a personality.
+      </footer>
+    </main>
+  </div>
+  <div class="toast" id="toast">copied</div>
+  <script>
+    const toast = document.getElementById("toast");
+    function ping(t) {
+      toast.textContent = t;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+    document.querySelectorAll(".swatch").forEach((el) => {
+      el.addEventListener("click", () => {
+        const hex = el.getAttribute("data-hex");
+        navigator.clipboard.writeText(hex).then(() => ping(hex));
+      });
+    });
+    document.getElementById("copy-prompt").addEventListener("click", () => {
+      const text = document.getElementById("agent-prompt").innerText;
+      navigator.clipboard.writeText(text).then(() => ping("prompt copied"));
+    });
+    const links = [...document.querySelectorAll(".nav-list a")];
+    const map = links.map((a) => [a, document.querySelector(a.getAttribute("href"))]);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+      });
+    }, { rootMargin: "-40% 0px -50% 0px" });
+    map.forEach(([, el]) => el && io.observe(el));
+  </script>
+</body>
+</html>
