@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ccLinux — Brand Book for humans & agents</title>
+  <title>ccLinux — pixel · Shizuku · 16×16</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500&family=Unbounded:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --void: #080A09;
@@ -20,732 +20,580 @@
       --amber: #FFB020;
       --panic: #FF3B4E;
       --cyan: #3EE0C8;
-      --font-display: "Instrument Serif", Georgia, serif;
-      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-      --r-hair: 2px;
-      --r-sm: 6px;
-      --r-md: 12px;
-      --max: 1120px;
+      --track-off: #3A433D;
+      --font: "Pixelify Sans", "Unbounded", sans-serif;
+      --ease: cubic-bezier(0.2, 0, 0, 1);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--void);
       color: var(--mist);
-      font-family: var(--font-mono);
-      font-size: 15px;
-      line-height: 1.6;
-      letter-spacing: -0.01em;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
+      font-weight: 400;
       min-height: 100vh;
     }
     a { color: var(--cyan); text-decoration: none; }
     a:hover { color: var(--phosphor); }
+    button, input { font-family: inherit; }
 
-    .scan {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,0,0,0.045) 3px
-      );
+    .px {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
+    svg.icon { width: 32px; height: 32px; display: block; flex-shrink: 0; shape-rendering: crispEdges; }
 
-    .shell {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      min-height: 100vh;
-    }
-
+    .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
     nav {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      padding: 28px 22px;
+      position: sticky; top: 0; height: 100vh;
+      padding: 24px 16px;
       border-right: 1px solid var(--rule);
       background: var(--void);
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+      display: flex; flex-direction: column; gap: 24px;
       z-index: 10;
     }
-    .mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--paper);
-      font-size: 13px;
-      font-weight: 500;
-    }
-    .mark svg { display: block; }
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .mark { display: flex; align-items: center; gap: 10px; color: var(--paper); font-size: 16px; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
     .nav-list a {
-      color: var(--dim);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: block;
-      padding: 6px 0;
+      color: var(--dim); font-size: 12px; display: block; padding: 8px 4px;
     }
     .nav-list a:hover, .nav-list a.active { color: var(--phosphor); }
-    .nav-foot { margin-top: auto; color: var(--dim); font-size: 11px; line-height: 1.5; }
+    .nav-foot { margin-top: auto; color: var(--dim); font-size: 12px; line-height: 1.4; }
 
     main { min-width: 0; }
-
     .hero {
-      position: relative;
       min-height: 100vh;
-      padding: 48px 56px 72px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 48px 56px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
       border-bottom: 1px solid var(--rule);
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      color: #1a241c;
-      font-size: 11px;
-      line-height: 1.45;
-      white-space: pre;
+      position: relative;
       overflow: hidden;
-      padding: 24px 28px;
-      user-select: none;
     }
-    .hero-bg::after {
+    .hero::before {
       content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(8,10,9,0.35) 0%, rgba(8,10,9,0.92) 55%, var(--void) 100%);
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(8,10,9,0.82), rgba(8,10,9,0.94)),
+        repeating-conic-gradient(#1a2418 0% 25%, #10140f 0% 50%);
+      background-size: auto, 16px 16px;
+      image-rendering: pixelated;
+      opacity: 0.55;
+      pointer-events: none;
     }
-    .hero-top, .hero-mid, .hero-bot { position: relative; z-index: 1; }
-    .eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--phosphor);
-    }
-    .eyebrow.dim { color: var(--dim); }
-    h1 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: clamp(64px, 10vw, 112px);
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      color: var(--paper);
-      margin: 16px 0 20px;
-    }
-    .lede {
-      max-width: 640px;
-      font-size: 15px;
-      color: var(--mist);
-    }
-    .lede em { font-style: italic; font-family: var(--font-display); font-size: 22px; color: var(--paper); letter-spacing: -0.02em; }
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px 40px;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dim);
-      font-weight: 500;
-    }
-    .hero-meta b { color: var(--paper); font-weight: 500; }
+    .hero > * { position: relative; }
+    .eyebrow { font-size: 12px; color: var(--phosphor); letter-spacing: 0.06em; text-transform: uppercase; }
+    h1 { font-size: 64px; line-height: 1; color: var(--paper); font-weight: 400; margin: 16px 0; }
+    .lede { max-width: 42em; }
+    .lede em { font-style: normal; color: var(--paper); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 16px 32px; font-size: 12px; color: var(--dim); }
+    .hero-meta b { color: var(--paper); font-weight: 400; }
+
     .caret {
-      display: inline-block;
-      width: 9px;
-      height: 1.05em;
-      background: var(--phosphor);
-      box-shadow: 0 0 18px rgba(200,245,66,0.45);
-      animation: blink 1.1s step-end infinite;
-      vertical-align: text-bottom;
-      margin-left: 2px;
+      display: inline-block; width: 12px; height: 16px; background: var(--phosphor);
+      animation: blink 1.1s step-end infinite; vertical-align: text-bottom; margin-left: 4px;
     }
     @keyframes blink { 50% { opacity: 0; } }
 
     section.block {
-      padding: 96px 56px;
+      padding: 64px 56px;
       border-bottom: 1px solid var(--rule);
-      max-width: calc(var(--max) + 112px);
+      max-width: 1180px;
     }
-    .kicker {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    h2 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 40px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--paper);
-    }
-    h3 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 28px;
-      letter-spacing: -0.015em;
-      color: var(--paper);
-      margin: 36px 0 12px;
-    }
-    p.prose { max-width: 68ch; }
+    h2 { font-size: 32px; line-height: 1.2; color: var(--paper); font-weight: 400; margin: 12px 0 16px; }
+    h3 { font-size: 24px; color: var(--paper); font-weight: 400; margin: 32px 0 12px; }
+    .prose { max-width: 46em; }
     p + p { margin-top: 12px; }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
 
     .card {
       background: var(--chassis);
       border: 1px solid var(--rule);
-      border-radius: var(--r-md);
+      border-radius: 24px;
       padding: 24px;
     }
-    .card h3 { margin-top: 0; font-size: 28px; }
-    .card .n {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--dim);
-      font-weight: 500;
-      margin-bottom: 10px;
+    .card h3 { margin-top: 0; }
+    .card .n { font-size: 12px; color: var(--dim); margin-bottom: 8px; }
+
+    /* Material 3 switch */
+    .m3 {
+      appearance: none; -webkit-appearance: none;
+      width: 52px; height: 32px; padding: 0; margin: 0;
+      border-radius: 999px;
+      border: 2px solid var(--track-off);
+      background: transparent;
+      position: relative; cursor: pointer; flex-shrink: 0;
+      transition: background 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .m3::after {
+      content: "";
+      position: absolute;
+      width: 16px; height: 16px; border-radius: 99px;
+      background: var(--dim);
+      left: 6px; top: 50%; transform: translateY(-50%);
+      transition: 200ms var(--ease);
+    }
+    .m3.on {
+      background: var(--phosphor);
+      border-color: var(--phosphor);
+    }
+    .m3.on::after {
+      width: 24px; height: 24px;
+      left: 22px;
+      background: var(--void);
     }
 
-    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 28px; }
-    .swatch {
-      border: 1px solid var(--rule);
-      border-radius: var(--r-sm);
-      overflow: hidden;
+    .settings {
       background: var(--chassis);
-      cursor: pointer;
-      text-align: left;
-      font: inherit;
-      color: inherit;
-      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      margin-top: 24px;
     }
-    .swatch:hover { border-color: var(--mist); }
-    .chip { height: 88px; }
-    .swatch fig { display: block; }
-    .meta { padding: 10px 12px 12px; }
-    .meta .name { color: var(--paper); font-size: 13px; font-weight: 500; }
-    .meta .hex { color: var(--dim); font-size: 11px; letter-spacing: 0.06em; margin-top: 2px; }
-    .meta .role { color: var(--dim); font-size: 11px; margin-top: 8px; line-height: 1.4; }
+    .cat {
+      font-size: 12px; color: var(--phosphor);
+      padding: 16px 20px 8px;
+    }
+    .pref {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      min-height: 72px;
+      border-top: 1px solid var(--rule);
+      width: 100%;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .pref:first-of-type { border-top: none; }
+    .pref-text { flex: 1; min-width: 0; }
+    .pref-title { font-size: 16px; color: var(--paper); line-height: 1.3; }
+    .pref-sub { font-size: 12px; color: var(--dim); margin-top: 4px; line-height: 1.3; }
+
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 24px; }
+    .swatch {
+      border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+      background: var(--chassis); cursor: pointer; text-align: left;
+      font: inherit; color: inherit; width: 100%;
+    }
+    .chip { height: 64px; }
+    .meta { padding: 12px; }
+    .meta .name { color: var(--paper); font-size: 16px; }
+    .meta .hex { color: var(--dim); font-size: 12px; }
+    .meta .role { color: var(--dim); font-size: 12px; margin-top: 8px; }
 
     .type-row {
       border-top: 1px solid var(--rule);
-      padding: 22px 0;
+      padding: 16px 0;
       display: grid;
       grid-template-columns: 160px 1fr;
-      gap: 24px;
-      align-items: end;
+      gap: 16px; align-items: end;
     }
-    .type-row .spec { color: var(--dim); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
-    .t-cover { font-family: var(--font-display); font-size: 72px; line-height: 0.95; letter-spacing: -0.03em; color: var(--paper); }
-    .t-h { font-family: var(--font-display); font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; color: var(--paper); }
-    .t-hs { font-family: var(--font-display); font-size: 28px; color: var(--paper); }
-    .t-body { font-size: 15px; }
-    .t-ui { font-size: 13px; }
-    .t-eye { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--phosphor); }
+    .type-row .spec { color: var(--dim); font-size: 12px; }
+    .t64 { font-size: 64px; line-height: 1; color: var(--paper); }
+    .t32 { font-size: 32px; color: var(--paper); }
+    .t24 { font-size: 24px; color: var(--paper); }
+    .t16 { font-size: 16px; }
+    .t12 { font-size: 12px; color: var(--phosphor); }
 
-    .btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
-    button.btn, a.btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid transparent;
-      border-radius: var(--r-sm);
-      padding: 10px 16px;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      line-height: 1.3;
-      text-decoration: none;
+    .btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid transparent; border-radius: 8px;
+      padding: 12px 16px; font-size: 16px; cursor: pointer;
+      line-height: 1.2; text-decoration: none; color: inherit; background: transparent;
     }
-    .btn-ph {
-      background: var(--phosphor);
-      color: var(--void);
-      box-shadow: 0 0 24px rgba(200,245,66,0.25);
-    }
-    .btn-ph:hover { filter: brightness(1.06); color: var(--void); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--mist);
-      border-color: var(--rule);
-    }
+    .btn-ph { background: var(--phosphor); color: var(--void); }
+    .btn-ghost { border-color: var(--rule); color: var(--mist); }
     .btn-ghost:hover { background: var(--panel); color: var(--paper); }
     .btn-panic { background: var(--panic); color: var(--paper); }
-    .btn-amber { background: var(--amber); color: var(--void); }
 
-    .term {
-      background: var(--chassis);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-md);
-      overflow: hidden;
-      margin-top: 24px;
+    .hotbar {
+      display: flex; gap: 0; margin-top: 16px; width: max-content;
+      background: #1a120c; padding: 4px; border: 2px solid #2b2118;
     }
-    .term-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--rule);
-      color: var(--dim);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 500;
+    .slot {
+      width: 40px; height: 40px;
+      background: #8b8b8b;
+      box-shadow: inset 2px 2px 0 #ffffffaa, inset -2px -2px 0 #373737;
+      display: grid; place-items: center;
+      image-rendering: pixelated;
     }
-    .dots { display: flex; gap: 6px; }
-    .dot { width: 8px; height: 8px; border-radius: 99px; background: var(--rule); }
-    .term-body {
-      padding: 18px 18px 22px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--mist);
-    }
-    .prompt { color: var(--phosphor); }
-    .info { color: var(--cyan); }
-    .warn { color: var(--amber); }
-    .err { color: var(--panic); }
+    .slot.on { box-shadow: inset 0 0 0 2px var(--phosphor), inset 2px 2px 0 #fff, inset -2px -2px 0 #373737; }
 
-    .grub {
-      background: var(--chassis);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-md);
-      padding: 18px;
-      margin-top: 16px;
-      font-size: 13px;
-    }
-    .grub-row {
-      padding: 8px 12px;
-      border-radius: var(--r-hair);
-      color: var(--mist);
-    }
-    .grub-row.on {
-      background: var(--phosphor);
-      color: var(--void);
-      font-weight: 500;
-    }
-
-    .logo-row { display: flex; gap: 16px; align-items: stretch; margin-top: 24px; }
-    .logo-tile {
-      flex: 1;
-      border: 1px solid var(--rule);
-      border-radius: var(--r-md);
-      background: var(--chassis);
-      min-height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--paper);
-      font-size: 18px;
-      font-weight: 500;
-    }
-    .logo-tile.inv { background: var(--phosphor); color: var(--void); border-color: var(--phosphor); }
-    .logo-tile.paper { background: var(--paper); color: var(--void); border-color: var(--paper); }
+    .icons { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; align-items: end; }
+    .icon-cap { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; color: var(--dim); }
 
     .do, .dont {
-      border-radius: var(--r-md);
-      padding: 22px 24px;
-      border: 1px solid var(--rule);
+      border-radius: 24px; padding: 24px; border: 1px solid var(--rule);
     }
     .do { background: #101612; }
     .dont { background: #140c0e; }
-    .do h3, .dont h3 { margin: 0 0 12px; font-size: 28px; }
-    .do li, .dont li { margin-left: 18px; margin-top: 8px; }
-    .do .n { color: var(--phosphor); }
-    .dont .n { color: var(--panic); }
+    .do h3, .dont h3 { margin-top: 0; }
+    .do li, .dont li { margin-left: 20px; margin-top: 8px; }
+    .do .n { color: var(--phosphor); font-size: 12px; }
+    .dont .n { color: var(--panic); font-size: 12px; }
 
     pre.prompt-box {
-      margin-top: 20px;
-      background: var(--panel);
-      border: 1px solid var(--rule);
-      border-radius: var(--r-sm);
-      padding: 18px 20px;
-      font-size: 12px;
-      line-height: 1.55;
-      color: var(--paper);
-      overflow: auto;
-      white-space: pre-wrap;
+      margin-top: 16px; background: var(--panel); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 16px; font-size: 12px; line-height: 1.5;
+      color: var(--paper); overflow: auto; white-space: pre-wrap;
+      font-family: var(--font);
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 13px;
-    }
-    th, td {
-      text-align: left;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--rule);
-      vertical-align: top;
-    }
-    th { color: var(--dim); font-weight: 500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
-    td code, p code, li code {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      background: var(--panel);
-      padding: 1px 5px;
-      border-radius: var(--r-hair);
-      color: var(--paper);
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 16px; }
+    th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    th { color: var(--dim); font-size: 12px; font-weight: 400; }
+    code {
+      font-family: var(--font); font-size: 12px;
+      background: var(--panel); padding: 2px 6px; color: var(--paper);
     }
 
     .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--phosphor);
-      color: var(--void);
-      padding: 10px 14px;
-      border-radius: var(--r-sm);
-      font-size: 13px;
-      font-weight: 500;
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: 160ms ease;
-      z-index: 40;
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--phosphor); color: var(--void);
+      padding: 12px 16px; border-radius: 8px; font-size: 16px;
+      opacity: 0; transform: translateY(8px); pointer-events: none;
+      transition: 160ms var(--ease); z-index: 40;
     }
     .toast.show { opacity: 1; transform: none; }
-
-    footer.block { color: var(--dim); font-size: 13px; }
+    footer.block { color: var(--dim); font-size: 12px; }
 
     @media (max-width: 900px) {
       .shell { grid-template-columns: 1fr; }
       nav { display: none; }
-      .hero, section.block, footer.block { padding: 48px 22px; }
-      .grid-2, .grid-3, .grid-4, .swatches { grid-template-columns: 1fr 1fr; }
-      .type-row { grid-template-columns: 1fr; gap: 8px; }
-      .logo-row { flex-direction: column; }
-      h1 { font-size: 64px; }
-    }
-    @media (max-width: 560px) {
+      .hero, section.block, footer.block { padding: 40px 20px; }
       .grid-2, .grid-3, .grid-4, .swatches { grid-template-columns: 1fr; }
+      .type-row { grid-template-columns: 1fr; }
+      h1 { font-size: 48px; }
     }
   </style>
 </head>
 <body>
-  <div class="scan" aria-hidden="true"></div>
   <div class="shell">
     <nav>
       <div class="mark">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <circle cx="11" cy="11" r="10" stroke="#C8F542" stroke-width="1.5"/>
-          <path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#080A09"/>
-          <rect x="16" y="9.2" width="2.2" height="3.6" fill="#C8F542"/>
+        <svg class="icon" viewBox="0 0 16 16" aria-hidden="true" width="22" height="22">
+          <rect width="16" height="16" fill="#3A2A1A"/>
+          <rect x="6" y="2" width="4" height="8" fill="#C8F542"/>
+          <rect x="5" y="9" width="6" height="2" fill="#6B4A22"/>
+          <rect x="4" y="11" width="8" height="3" fill="#8B5A2B"/>
         </svg>
         ccLinux
       </div>
       <ul class="nav-list">
-        <li><a href="#cover">00 Cover</a></li>
-        <li><a href="#agents">01 For agents</a></li>
-        <li><a href="#dna">02 DNA</a></li>
-        <li><a href="#color">03 Color</a></li>
-        <li><a href="#type">04 Type</a></li>
-        <li><a href="#mark">05 Mark</a></li>
-        <li><a href="#ui">06 Components</a></li>
-        <li><a href="#voice">07 Voice</a></li>
-        <li><a href="#law">08 Do / Don't</a></li>
-        <li><a href="#steal">09 21st + Refero</a></li>
-        <li><a href="#prompt">10 Prompt</a></li>
+        <li><a href="#cover">00 cover</a></li>
+        <li><a href="#dna">01 dna</a></li>
+        <li><a href="#levers">02 levers</a></li>
+        <li><a href="#type">03 type</a></li>
+        <li><a href="#color">04 color</a></li>
+        <li><a href="#pixels">05 16×16</a></li>
+        <li><a href="#oss">06 opensource</a></li>
+        <li><a href="#law">07 do / don't</a></li>
+        <li><a href="#steal">08 steal list</a></li>
+        <li><a href="#prompt">09 prompt</a></li>
       </ul>
-      <div class="nav-foot">
-        DESIGN.md is the contract.<br />
-        This page is the proof.
-      </div>
+      <div class="nav-foot">pixel type<br>shizuku switch<br>stolen blocks</div>
     </nav>
-
     <main>
       <header class="hero" id="cover">
-        <div class="hero-bg" aria-hidden="true">[    0.000000] ccLinux 0.9.4-arch (tty1)
-[    0.000012] Command line: BOOT_IMAGE=/linux/boot.lua root=/dev/craftos
-[    0.000184] BIOS-provided physical RAM map:
-[    0.000201]  0x00000000-0x0009ffff : usable
-[    0.000418] Kernel command line: quiet splash phosphor=1
-[    0.001102] CPU: ComputerCraft Lua 5.2 (CC: Tweaked)
-[    0.002441] Memory: 256K/256K available
-[    0.004880] GRUB 2.12 — ccLinux | Arch | Debian | FreeDOS | Memtest86+ | CraftOS
-[    0.008120] systemd[1]: Starting Getty on tty1...
-[    0.011004] pacman: syncing extra from github.com/vanyachickenganidanya-lgtm
-[    0.014440] rootfs: FHS mounted at /linux/rootfs
-[    0.018002] /proc /sys /dev /mnt/craftos online
-[    0.021110] dmesg: no GUI found (this is a feature)
-[    0.024008] neofetch: Arch-shaped lie detected, continuing
-[    0.028440] login: root
-[    0.028512] Last login: never, from a diamond computer
-root@ccLinux:~# uname -a
-ccLinux 0.9.4-arch #1 SMP PREEMPT CraftOS-PC i686 GNU/Linux
-root@ccLinux:~# pacman -Syu
-:: Synchronizing package databases...
- extra                  156.4 KiB  1.21M/s
-:: Starting full system upgrade...
- there is nothing to do
-root@ccLinux:~#</div>
-        <div class="hero-top">
-          <div class="eyebrow">00 — Brand book · DESIGN.md rendered</div>
-        </div>
-        <div class="hero-mid">
+        <div class="eyebrow">00 — brand book</div>
+        <div>
           <h1>ccLinux</h1>
           <p class="lede">
-            <em>phosphor receipt from a kernel that thinks it's Arch.</em><br /><br />
-            Брендбук, который читают нейросети: токены, роли, do/don't и откуда воровать скелеты.
-            Люди смотрят эту страницу. Агенты читают <code>DESIGN.md</code>.<span class="caret"></span>
+            <em>Shizuku running on a ComputerCraft monitor.</em><br /><br />
+            Пишу пиксельными шрифтами. Краду 16×16 из майнкрафта и из интернета.
+            Рычажки — как в настройках Android / Shizuku. Люблю опенсорс.
+            Нейросеть читает <code>DESIGN.md</code>, не «сделай красиво».<span class="caret"></span>
           </p>
         </div>
-        <div class="hero-bot hero-meta">
-          <div>Theme <b>dark TTY</b></div>
-          <div>Accent <b>#C8F542 ×1</b></div>
-          <div>Type <b>Instrument Serif + IBM Plex Mono</b></div>
-          <div>Weight cap <b>500</b></div>
+        <div class="hero-meta">
+          <div>type <b>pixel 12–64</b></div>
+          <div>boolean <b>M3 switch</b></div>
+          <div>icons <b>16×16 nn</b></div>
+          <div>license <b>GPL / MIT / Apache</b></div>
         </div>
       </header>
 
-      <section class="block" id="agents">
-        <div class="kicker"><span class="eyebrow">01 — For agents</span></div>
-        <h2>Как сделать так, чтобы нейросеть поняла стиль</h2>
-        <p class="prose">Картинка в Figma нейросети почти бесполезна. Ей нужен контракт: точные hex, роли («этот цвет только для CTA»), запреты и скелеты компонентов. Формат, который сейчас едят Cursor / Claude Code / Codex / v0 — это <strong style="color:var(--paper);font-weight:500">DESIGN.md</strong> в корне репо, как на <a href="https://styles.refero.design" target="_blank" rel="noopener">styles.refero.design</a>.</p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="n">1. Файл-закон</div>
-            <h3>DESIGN.md</h3>
-            <p>YAML-токены сверху, проза снизу. Одна атмосфера-строка. У каждого цвета — работа, не просто имя. Лежит в корне — агент подхватывает сам.</p>
-          </article>
-          <article class="card">
-            <div class="n">2. Запреты важнее вкуса</div>
-            <h3>Don't</h3>
-            <p>Без списка Don't агент включит Inter, градиент и «AI purple». Запрет — самый дешёвый способ держать стиль.</p>
-          </article>
-          <article class="card">
-            <div class="n">3. Откуда брать мясо</div>
-            <h3>Steal list</h3>
-            <p>Разреши 21st.dev на скелеты (ASCII, terminal). Refero — на дисциплину (Linear / Monad). Запрети палитры и rainbow-кнопки.</p>
-          </article>
-        </div>
-        <p class="prose" style="margin-top:28px">В этом репо уже лежит вся цепочка: <code>DESIGN.md</code> → <code>AGENTS.md</code> → <code>.cursor/rules/design.mdc</code> → эта страница. Промпт агенту: «strictly follow DESIGN.md».</p>
-      </section>
-
       <section class="block" id="dna">
-        <div class="kicker"><span class="eyebrow">02 — DNA</span></div>
-        <h2>Три столпа, не четыре</h2>
-        <div class="grid-3">
+        <div class="eyebrow">01 — dna</div>
+        <h2>Четыре столпа</h2>
+        <div class="grid-2">
           <article class="card">
-            <div class="n">TTY truth</div>
-            <h3>Это терминал.</h3>
-            <p>Нет GUI, нет иконок-в-кружках, нет «feature grid» как у SaaS. Продуктовый кадр — окно GRUB / dmesg / pacman.</p>
+            <div class="n">type</div>
+            <h3>Пиксель.</h3>
+            <p>Весь текст — bitmap. Сетки 12 / 16 / 24 / 32 / 48 / 64. Никакого Inter и никакого серрифа из прошлого брендбука.</p>
           </article>
           <article class="card">
-            <div class="n">One flashlight</div>
-            <h3>Один фосфор.</h3>
-            <p>Как acid-lime у Linear на Refero: <code>#C8F542</code> зажигает одно действие на экран. Остальное — тёплый монохром.</p>
+            <div class="n">assets</div>
+            <h3>16×16.</h3>
+            <p>Язык инвентаря Minecraft: nearest-neighbor, скошенный слот, блок как иконка. В git — перерисовка, не банка Mojang.</p>
           </article>
           <article class="card">
-            <div class="n">Editorial silence</div>
-            <h3>Серриф шепчет.</h3>
-            <p>Как Monad: заголовки Instrument Serif 400, весь UI — моно. Жирный шрифт запрещён. Контраст делает гарнитура.</p>
+            <div class="n">controls</div>
+            <h3>Рычажок Shizuku.</h3>
+            <p>Не iOS, не чекбокс, не пиксельный тумблер. Настоящий Material 3: 52×32, плавный thumb, фосфор когда ON.</p>
+          </article>
+          <article class="card">
+            <div class="n">politics</div>
+            <h3>Open source.</h3>
+            <p>GPL / MIT / Apache. Кредиты. Форк без стыда. Украл из интернета — напиши URL под файлом.</p>
           </article>
         </div>
       </section>
 
-      <section class="block" id="color">
-        <div class="kicker"><span class="eyebrow">03 — Color</span></div>
-        <h2>Палитра с должностями</h2>
-        <p class="prose">Клик копирует hex. Агенту нужны не «зелёный и чёрный», а роли. Phosphor — фонарик. Amber — предупреждение. Panic — смерть процесса. Cyan — dmesg info.</p>
-        <div class="swatches">
-          <button class="swatch" data-hex="#080A09"><div class="chip" style="background:#080A09;border-bottom:1px solid #2A332E"></div><div class="meta"><div class="name">Void</div><div class="hex">#080A09</div><div class="role">Холст. Чуть зелёный, не #000.</div></div></button>
-          <button class="swatch" data-hex="#101412"><div class="chip" style="background:#101412"></div><div class="meta"><div class="name">Chassis</div><div class="hex">#101412</div><div class="role">Карточки, хром терминала.</div></div></button>
-          <button class="swatch" data-hex="#171C19"><div class="chip" style="background:#171C19"></div><div class="meta"><div class="name">Panel</div><div class="hex">#171C19</div><div class="role">Инпуты, вложенные колодцы.</div></div></button>
-          <button class="swatch" data-hex="#2A332E"><div class="chip" style="background:#2A332E"></div><div class="meta"><div class="name">Rule</div><div class="hex">#2A332E</div><div class="role">1px границы вместо теней.</div></div></button>
-          <button class="swatch" data-hex="#6E7B73"><div class="chip" style="background:#6E7B73"></div><div class="meta"><div class="name">Dim</div><div class="hex">#6E7B73</div><div class="role">Вторичный текст, idle.</div></div></button>
-          <button class="swatch" data-hex="#C5CEC4"><div class="chip" style="background:#C5CEC4"></div><div class="meta"><div class="name">Mist</div><div class="hex">#C5CEC4</div><div class="role">Основной набор на void.</div></div></button>
-          <button class="swatch" data-hex="#E8EADC"><div class="chip" style="background:#E8EADC"></div><div class="meta"><div class="name">Paper</div><div class="hex">#E8EADC</div><div class="role">Заголовки. Тёплый, не #fff.</div></div></button>
-          <button class="swatch" data-hex="#C8F542"><div class="chip" style="background:#C8F542"></div><div class="meta"><div class="name">Phosphor</div><div class="hex">#C8F542</div><div class="role">Единственный CTA / GRUB select.</div></div></button>
-          <button class="swatch" data-hex="#FFB020"><div class="chip" style="background:#FFB020"></div><div class="meta"><div class="name">Amber</div><div class="hex">#FFB020</div><div class="role">Warn. Никогда не кнопка «далее».</div></div></button>
-          <button class="swatch" data-hex="#FF3B4E"><div class="chip" style="background:#FF3B4E"></div><div class="meta"><div class="name">Panic</div><div class="hex">#FF3B4E</div><div class="role">uninstall / oops / destroy.</div></div></button>
-          <button class="swatch" data-hex="#3EE0C8"><div class="chip" style="background:#3EE0C8"></div><div class="meta"><div class="name">Cyan</div><div class="hex">#3EE0C8</div><div class="role">Ссылки, info-строки dmesg.</div></div></button>
+      <section class="block" id="levers">
+        <div class="eyebrow">02 — levers · AOSP / Shizuku</div>
+        <h2>Вот так выглядят настройки</h2>
+        <p class="prose">Строка как в Android: иконка-блок, заголовок, подпись, справа switch. Это главный компонент бренда — не кнопка «Get started».</p>
+
+        <div class="settings">
+          <div class="cat">Shizuku · wireless debugging</div>
+          <button class="pref" type="button" data-toggle>
+            <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="#3A2A1A"/>
+              <rect x="6" y="2" width="4" height="8" fill="#C8F542"/>
+              <rect x="5" y="9" width="6" height="2" fill="#6B4A22"/>
+              <rect x="4" y="11" width="8" height="3" fill="#8B5A2B"/>
+            </svg>
+            <div class="pref-text">
+              <div class="pref-title">Рычаг / lever</div>
+              <div class="pref-sub">как рычаг на блоке, но анимация — Material</div>
+            </div>
+            <span class="m3 on" role="switch" aria-checked="true"></span>
+          </button>
+          <button class="pref" type="button" data-toggle>
+            <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="7" fill="#5CAD3A"/>
+              <rect y="3" width="16" height="2" fill="#3E8C28"/>
+              <rect y="7" width="16" height="9" fill="#8B5A2B"/>
+              <rect y="7" width="16" height="1" fill="#5A3A18"/>
+              <rect x="4" y="10" width="2" height="3" fill="#3A2410"/>
+            </svg>
+            <div class="pref-text">
+              <div class="pref-title">Беспроводная отладка</div>
+              <div class="pref-sub">adb over wifi · как в Shizuku</div>
+            </div>
+            <span class="m3 on" role="switch" aria-checked="true"></span>
+          </button>
+          <button class="pref" type="button" data-toggle>
+            <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="#2A2A2A"/>
+              <rect x="2" y="2" width="12" height="12" fill="#3D3D3D"/>
+              <rect x="3" y="3" width="10" height="10" fill="#C8F542"/>
+              <rect x="5" y="5" width="6" height="6" fill="#171C19"/>
+              <rect x="7" y="7" width="2" height="2" fill="#C8F542"/>
+            </svg>
+            <div class="pref-text">
+              <div class="pref-title">Командный блок</div>
+              <div class="pref-sub">root / app_process · выкл. по умолчанию</div>
+            </div>
+            <span class="m3" role="switch" aria-checked="false"></span>
+          </button>
+          <button class="pref" type="button" data-toggle>
+            <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="#6B1D1D"/>
+              <rect x="7" y="1" width="2" height="8" fill="#E03C3C"/>
+              <rect x="6" y="9" width="4" height="3" fill="#4A1010"/>
+              <rect x="5" y="12" width="6" height="3" fill="#8B5A2B"/>
+            </svg>
+            <div class="pref-text">
+              <div class="pref-title">Redstone torch</div>
+              <div class="pref-sub">warn · не цвет ON у свитча</div>
+            </div>
+            <span class="m3" role="switch" aria-checked="false"></span>
+          </button>
+          <button class="pref" type="button" data-toggle>
+            <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="#6B4A22"/>
+              <rect x="1" y="4" width="14" height="11" fill="#8B5A2B"/>
+              <rect x="1" y="4" width="14" height="3" fill="#C4A35A"/>
+              <rect x="7" y="6" width="2" height="2" fill="#2A1A0A"/>
+            </svg>
+            <div class="pref-text">
+              <div class="pref-title">Сундук с ассетами</div>
+              <div class="pref-sub">украл — укажи URL · OSI если можно</div>
+            </div>
+            <span class="m3 on" role="switch" aria-checked="true"></span>
+          </button>
+        </div>
+
+        <h3>Анатомия рычажка</h3>
+        <p class="prose">OFF: обводка 2px, thumb 16px слева. ON: заливка фосфор, thumb 24px справа, 200ms curve Material. Не пикселить сам switch — пиксель в тексте и иконке, рычаг гладкий.</p>
+        <div class="btns">
+          <span class="m3" role="presentation"></span>
+          <span class="m3 on" role="presentation"></span>
+          <span style="font-size:12px;color:var(--dim)">off / on</span>
         </div>
       </section>
 
       <section class="block" id="type">
-        <div class="kicker"><span class="eyebrow">04 — Type</span></div>
-        <h2>Две семьи. Третьей нет.</h2>
-        <div class="type-row"><div class="spec">Cover 96 · serif 400</div><div class="t-cover">uname -a</div></div>
-        <div class="type-row"><div class="spec">Display 72 · −0.03em</div><div class="t-cover" style="font-size:56px">kernel panic</div></div>
-        <div class="type-row"><div class="spec">Heading 40</div><div class="t-h">GNU/Linux for a computer that isn't real</div></div>
-        <div class="type-row"><div class="spec">Heading-sm 28</div><div class="t-hs">pacman -Syu && reboot</div></div>
-        <div class="type-row"><div class="spec">Body 15 / 400 / 1.6</div><div class="t-body">Репозиторий содержит код ccLinux — TTY-системы для CC: Tweaked. Без GUI. GRUB, dmesg, pacman, bash.</div></div>
-        <div class="type-row"><div class="spec">UI 13 / 500</div><div class="t-ui">install auto · recovery · FreeDOS 1.3</div></div>
-        <div class="type-row"><div class="spec">Eyebrow 11 / 0.12em</div><div class="t-eye">05 — Mark · never steve</div></div>
+        <div class="eyebrow">03 — type</div>
+        <h2>Пиксель, не журнал</h2>
+        <p class="prose">Pixelify Sans (латиница) + Unbounded (кириллица) + Monocraft, если вендоришь OFL. Только размеры 12 16 24 32 48 64.</p>
+        <div class="type-row"><div class="spec">64 cover</div><div class="t64">ccLinux</div></div>
+        <div class="type-row"><div class="spec">32 heading</div><div class="t32">grant wireless debug</div></div>
+        <div class="type-row"><div class="spec">24 heading-sm</div><div class="t24">pacman -Syu</div></div>
+        <div class="type-row"><div class="spec">16 body</div><div class="t16">Пишу пиксельными шрифтами. Рычажки — как в Shizuku.</div></div>
+        <div class="type-row"><div class="spec">12 caption</div><div class="t12">GPL-3.0-or-later · Apache-2.0 · OFL</div></div>
       </section>
 
-      <section class="block" id="mark">
-        <div class="kicker"><span class="eyebrow">05 — Mark</span></div>
-        <h2>Клин и курсор, не Тикс</h2>
-        <p class="prose">Знак — круг с вырезанным клином (pacman) и блочный курсор. Без глаз, без меха, без крипера. Слово — <code>ccLinux</code>, camel c, моно 500.</p>
-        <div class="logo-row">
-          <div class="logo-tile">
-            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#C8F542" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#101412"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#C8F542"/></svg>
-            ccLinux
-          </div>
-          <div class="logo-tile inv">
-            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#080A09" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#C8F542"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#080A09"/></svg>
-            ccLinux
-          </div>
-          <div class="logo-tile paper">
-            <svg width="28" height="28" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#080A09" stroke-width="1.5"/><path d="M11 11 L20 7 A10 10 0 0 1 20 15 Z" fill="#E8EADC"/><rect x="16" y="9.2" width="2.2" height="3.6" fill="#080A09"/></svg>
-            ccLinux
-          </div>
-        </div>
-      </section>
-
-      <section class="block" id="ui">
-        <div class="kicker"><span class="eyebrow">06 — Components</span></div>
-        <h2>Скелет с 21st, покраска наша</h2>
-        <p class="prose">Кнопки 6px, карточки 12px, бейджи 2px. Пилюли 9999 — только для точек. Один фосфорный CTA на вид.</p>
-        <div class="btns">
-          <button class="btn btn-ph">pacman -Syu</button>
-          <button class="btn btn-ghost">man pacman</button>
-          <button class="btn btn-panic">panic</button>
-          <span class="btn btn-ghost" style="padding:4px 8px;font-size:11px;border-radius:2px">kbd Ctrl+T</span>
-        </div>
-
-        <div class="term">
-          <div class="term-bar">
-            <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
-            root@ccLinux: / — tty1
-          </div>
-          <div class="term-body">
-            <div><span class="prompt">root@ccLinux:~#</span> uname -r</div>
-            <div>0.9.4-arch</div>
-            <div><span class="prompt">root@ccLinux:~#</span> dmesg | tail -3</div>
-            <div class="info">[  12.440] info: pacman mirror online</div>
-            <div class="warn">[  12.441] warn: http fallback to builtin extra</div>
-            <div class="err">[  12.890] oops: cow says moo in kernel space (system lives)</div>
-            <div><span class="prompt">root@ccLinux:~#</span> <span class="caret"></span></div>
-          </div>
-        </div>
-
-        <h3>GRUB — highlight primitive</h3>
-        <p class="prose">Выбранный ряд = фосфорная заливка. Это же состояние для active nav и selected list.</p>
-        <div class="grub">
-          <div class="grub-row on">ccLinux</div>
-          <div class="grub-row">Arch Linux</div>
-          <div class="grub-row">Debian GNU/Linux 12</div>
-          <div class="grub-row">recovery</div>
-          <div class="grub-row">FreeDOS 1.3</div>
-          <div class="grub-row">Memtest86+</div>
-          <div class="grub-row">CraftOS</div>
+      <section class="block" id="color">
+        <div class="eyebrow">04 — color</div>
+        <h2>Фосфор = ON</h2>
+        <p class="prose">Клик копирует hex. Цвет свитча во включённом состоянии — и есть бренд. iOS-зелёный и Material-фиолетовый запрещены.</p>
+        <div class="swatches">
+          <button class="swatch" data-hex="#080A09"><div class="chip" style="background:#080A09;border-bottom:1px solid #2A332E"></div><div class="meta"><div class="name">Void</div><div class="hex">#080A09</div><div class="role">холст</div></div></button>
+          <button class="swatch" data-hex="#101412"><div class="chip" style="background:#101412"></div><div class="meta"><div class="name">Chassis</div><div class="hex">#101412</div><div class="role">группа настроек</div></div></button>
+          <button class="swatch" data-hex="#171C19"><div class="chip" style="background:#171C19"></div><div class="meta"><div class="name">Panel</div><div class="hex">#171C19</div><div class="role">слоты</div></div></button>
+          <button class="swatch" data-hex="#2A332E"><div class="chip" style="background:#2A332E"></div><div class="meta"><div class="name">Rule</div><div class="hex">#2A332E</div><div class="role">разделитель строк</div></div></button>
+          <button class="swatch" data-hex="#6E7B73"><div class="chip" style="background:#6E7B73"></div><div class="meta"><div class="name">Dim</div><div class="hex">#6E7B73</div><div class="role">subtitle / off thumb</div></div></button>
+          <button class="swatch" data-hex="#C5CEC4"><div class="chip" style="background:#C5CEC4"></div><div class="meta"><div class="name">Mist</div><div class="hex">#C5CEC4</div><div class="role">тело</div></div></button>
+          <button class="swatch" data-hex="#E8EADC"><div class="chip" style="background:#E8EADC"></div><div class="meta"><div class="name">Paper</div><div class="hex">#E8EADC</div><div class="role">заголовок</div></div></button>
+          <button class="swatch" data-hex="#C8F542"><div class="chip" style="background:#C8F542"></div><div class="meta"><div class="name">Phosphor</div><div class="hex">#C8F542</div><div class="role">switch ON</div></div></button>
+          <button class="swatch" data-hex="#3A433D"><div class="chip" style="background:#3A433D"></div><div class="meta"><div class="name">Track off</div><div class="hex">#3A433D</div><div class="role">обводка OFF</div></div></button>
+          <button class="swatch" data-hex="#FFB020"><div class="chip" style="background:#FFB020"></div><div class="meta"><div class="name">Amber</div><div class="hex">#FFB020</div><div class="role">warn, не ON</div></div></button>
+          <button class="swatch" data-hex="#FF3B4E"><div class="chip" style="background:#FF3B4E"></div><div class="meta"><div class="name">Panic</div><div class="hex">#FF3B4E</div><div class="role">destroy</div></div></button>
+          <button class="swatch" data-hex="#3EE0C8"><div class="chip" style="background:#3EE0C8"></div><div class="meta"><div class="name">Cyan</div><div class="hex">#3EE0C8</div><div class="role">ссылки</div></div></button>
         </div>
       </section>
 
-      <section class="block" id="voice">
-        <div class="kicker"><span class="eyebrow">07 — Voice</span></div>
-        <h2>Как man-page, не как лендинг</h2>
-        <div class="grid-2">
-          <article class="card">
-            <div class="n">Do say</div>
-            <p>«Без GUI — только терминал.»<br />«install auto — установка и ребут в GRUB.»<br />«Если http недоступен — встроенный extra.»</p>
-          </article>
-          <article class="card">
-            <div class="n">Don't say</div>
-            <p>«Unlock your Linux potential.»<br />«Reimagine crafting.»<br />«Seamless next-gen OS experience.»</p>
-          </article>
+      <section class="block" id="pixels">
+        <div class="eyebrow">05 — 16×16</div>
+        <h2>Краду язык, не банку</h2>
+        <p class="prose">Ассеты Minecraft и из интернета — да, это стиль. В публичный репозиторий не кладём текстуры из jar. Перерисовываем 16×16, скалим только ×2 ×3 ×4, <code>image-rendering: pixelated</code>. Из интернета — с URL в кредитах.</p>
+        <div class="icons">
+          <div class="icon-cap">
+            <svg class="icon" viewBox="0 0 16 16" width="48" height="48"><rect width="16" height="7" fill="#5CAD3A"/><rect y="3" width="16" height="2" fill="#3E8C28"/><rect y="7" width="16" height="9" fill="#8B5A2B"/><rect y="7" width="16" height="1" fill="#5A3A18"/><rect x="4" y="10" width="2" height="3" fill="#3A2410"/></svg>
+            grass
+          </div>
+          <div class="icon-cap">
+            <svg class="icon" viewBox="0 0 16 16" width="48" height="48"><rect width="16" height="16" fill="#3A2A1A"/><rect x="6" y="2" width="4" height="8" fill="#C8F542"/><rect x="5" y="9" width="6" height="2" fill="#6B4A22"/><rect x="4" y="11" width="8" height="3" fill="#8B5A2B"/></svg>
+            lever
+          </div>
+          <div class="icon-cap">
+            <svg class="icon" viewBox="0 0 16 16" width="48" height="48"><rect width="16" height="16" fill="#6B4A22"/><rect x="1" y="4" width="14" height="11" fill="#8B5A2B"/><rect x="1" y="4" width="14" height="3" fill="#C4A35A"/><rect x="7" y="6" width="2" height="2" fill="#2A1A0A"/></svg>
+            chest
+          </div>
+          <div class="icon-cap">
+            <svg class="icon" viewBox="0 0 16 16" width="48" height="48"><rect width="16" height="16" fill="#2A2A2A"/><rect x="2" y="2" width="12" height="12" fill="#3D3D3D"/><rect x="3" y="3" width="10" height="10" fill="#C8F542"/><rect x="5" y="5" width="6" height="6" fill="#171C19"/><rect x="7" y="7" width="2" height="2" fill="#C8F542"/></svg>
+            command
+          </div>
+          <div class="icon-cap">
+            <svg class="icon" viewBox="0 0 16 16" width="48" height="48"><rect width="16" height="16" fill="#6B1D1D"/><rect x="7" y="1" width="2" height="8" fill="#E03C3C"/><rect x="6" y="9" width="4" height="3" fill="#4A1010"/><rect x="5" y="12" width="6" height="3" fill="#8B5A2B"/></svg>
+            torch
+          </div>
+        </div>
+        <h3>Хотбар — скос инвентаря</h3>
+        <div class="hotbar px">
+          <div class="slot on"><svg class="icon" viewBox="0 0 16 16" width="24" height="24"><rect width="16" height="16" fill="#3A2A1A"/><rect x="6" y="2" width="4" height="8" fill="#C8F542"/><rect x="5" y="9" width="6" height="2" fill="#6B4A22"/><rect x="4" y="11" width="8" height="3" fill="#8B5A2B"/></svg></div>
+          <div class="slot"><svg class="icon" viewBox="0 0 16 16" width="24" height="24"><rect width="16" height="7" fill="#5CAD3A"/><rect y="7" width="16" height="9" fill="#8B5A2B"/></svg></div>
+          <div class="slot"><svg class="icon" viewBox="0 0 16 16" width="24" height="24"><rect width="16" height="16" fill="#6B4A22"/><rect x="1" y="4" width="14" height="11" fill="#8B5A2B"/><rect x="1" y="4" width="14" height="3" fill="#C4A35A"/></svg></div>
+          <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+          <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        </div>
+      </section>
+
+      <section class="block" id="oss">
+        <div class="eyebrow">06 — opensource</div>
+        <h2>Любовь к форкам</h2>
+        <p class="prose">Опенсорс — не наклейка в футере. Поза: GPL-3.0 на ОС, MIT на мелочь, Apache-2.0 когда рядом Shizuku/Android. Всегда LICENSE и строка Credits.</p>
+        <div class="grid-3">
+          <article class="card"><div class="n">ccLinux</div><h3>GPL-3.0</h3><p>Ядро, шелл, pacman — как GNU, не как проприетарный лаунчер.</p></article>
+          <article class="card"><div class="n">Shizuku</div><h3>Apache-2.0</h3><p>RikkaApps. Берём UX рычажков, не копируем пакет целиком без лицензии.</p></article>
+          <article class="card"><div class="n">Monocraft</div><h3>OFL</h3><p>Пиксельный моно с кириллицей. Вендорить в <code>brand/fonts</code>, когда сеть отдаёт файл.</p></article>
         </div>
       </section>
 
       <section class="block" id="law">
-        <div class="kicker"><span class="eyebrow">08 — Law</span></div>
-        <h2>Это читает модель первым</h2>
+        <div class="eyebrow">07 — law</div>
+        <h2>Это модель читает первой</h2>
         <div class="grid-2">
           <div class="do">
             <div class="n">Do</div>
             <h3>Делай</h3>
             <ul>
-              <li>Instrument Serif 400 на заголовки, IBM Plex Mono на всё остальное</li>
-              <li>Один фосфорный CTA на экран</li>
-              <li>Границы 1px Rule, не тени</li>
-              <li>Сетка 4 / 8 / 16 / 24 / 96</li>
-              <li>Eyebrow <code>01 — NAME</code> перед серриф-заголовком</li>
-              <li>Hero начинать с ASCII/terminal скелета</li>
+              <li>Пиксельный шрифт, размеры 12–64</li>
+              <li>Boolean = M3 switch 52×32, фосфор ON</li>
+              <li>Строка настроек: блок + title + sub + рычаг</li>
+              <li>Иконки 16×16, nearest-neighbor</li>
+              <li>Кредит OSS и URL украденного PNG</li>
             </ul>
           </div>
           <div class="dont">
             <div class="n">Don't</div>
             <h3>Не делай</h3>
             <ul>
-              <li>Inter, Roboto, вес 600+</li>
-              <li>Градиенты на кнопках и заголовках</li>
-              <li>Пилюли-кнопки, rainbow, liquid metal</li>
-              <li>Чистое #000 / #fff холстом</li>
-              <li>Стив, крипер, клипарт-Тикс как лого</li>
-              <li>«AI purple» #8b5cf6 и второй цветной fill</li>
+              <li>Inter, Roboto, Instrument Serif, IBM Plex</li>
+              <li>iOS-тумблер, чекбокс вместо рычага</li>
+              <li>Пикселить сам switch</li>
+              <li>Текстуры из jar Mojang в git</li>
+              <li>AI-апскейл, bilinear, liquid metal</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section class="block" id="steal">
-        <div class="kicker"><span class="eyebrow">09 — Steal list</span></div>
-        <h2>Заходи, бери скелет, перекрась</h2>
-        <p class="prose">Агенту нельзя «вдохновляться вообще». Ему нужен белый список URL и чёрный список приёмов. Иначе он стащит rainbow-button с 21st и назовёт это брендом.</p>
+        <div class="eyebrow">08 — steal list</div>
+        <h2>Откуда воровать легально по вкусу</h2>
         <table>
-          <thead>
-            <tr><th>Источник</th><th>Брать</th><th>Не брать</th></tr>
-          </thead>
+          <thead><tr><th>Источник</th><th>Брать</th><th>Не брать</th></tr></thead>
           <tbody>
             <tr>
-              <td><a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a></td>
-              <td>ASCII hero, terminal chrome, тёмные компактные карточки, hover-preview, hairline grids. Пример: <a href="https://21st.dev/@larsen66/components/hero-ascii-one" target="_blank" rel="noopener">Hero ASCII one</a></td>
-              <td>Rainbow borders, liquid metal, цветные градиент-CTA, 3D candy, glassmorphism</td>
+              <td>Android Settings / <a href="https://github.com/RikkaApps/Shizuku" target="_blank" rel="noopener">Shizuku</a></td>
+              <td>preference-лист, 24px группы, 52×32 switch, title+sub</td>
+              <td>Roboto, FAB, фиолетовый Material You, iOS green</td>
             </tr>
             <tr>
-              <td><a href="https://styles.refero.design" target="_blank" rel="noopener">Refero Styles</a></td>
-              <td>Метод DESIGN.md. <a href="https://styles.refero.design/style/90ce5883-bb24-4466-93f7-801cd617b0d1" target="_blank" rel="noopener">Linear</a> — один акцент на midnight. <a href="https://styles.refero.design/style/fc84e9f0-2058-4a0a-8d26-9cc1ba84ec9c" target="_blank" rel="noopener">Monad</a> — serif 400 + mono UI</td>
-              <td>Их hex, Inter, пергамент Monad, acid-lime Linear <code>#e4f222</code></td>
+              <td>Minecraft</td>
+              <td>сетка 16×16, скос слота, хотбар, блок-иконка, рычаг как идея</td>
+              <td>официальные текстуры в git, 3D Стив как лого</td>
+            </tr>
+            <tr>
+              <td>интернет PNG</td>
+              <td>пиксель, nearest-neighbor, OSI если есть, URL в Credits</td>
+              <td>без источника в публичный репо, AI- mush</td>
+            </tr>
+            <tr>
+              <td><a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a></td>
+              <td>ASCII/terminal скелеты</td>
+              <td>rainbow, liquid metal, градиент-кнопки</td>
+            </tr>
+            <tr>
+              <td><a href="https://styles.refero.design" target="_blank" rel="noopener">Refero</a></td>
+              <td>метод DESIGN.md, один акцент</td>
+              <td>Inter, серриф Monad, чужие hex</td>
             </tr>
           </tbody>
         </table>
       </section>
 
       <section class="block" id="prompt">
-        <div class="kicker"><span class="eyebrow">10 — Agent prompt</span></div>
-        <h2>Вставь это в Cursor / Claude</h2>
-        <p class="prose">Плюс <code>@DESIGN.md</code>. Без файла промпт держится одну сессию. С файлом в корне — весь проект.</p>
+        <div class="eyebrow">09 — agent prompt</div>
+        <h2>Вставь в Cursor</h2>
         <div class="btns">
-          <button class="btn btn-ph" id="copy-prompt" type="button">Copy prompt</button>
-          <a class="btn btn-ghost" href="../DESIGN.md">Open DESIGN.md</a>
+          <button class="btn btn-ph" id="copy-prompt" type="button">copy prompt</button>
+          <a class="btn btn-ghost" href="../DESIGN.md">DESIGN.md</a>
         </div>
         <pre class="prompt-box" id="agent-prompt">Read DESIGN.md at the repo root and follow it strictly.
 
-Visual contract:
-- Canvas #080A09, surfaces #101412 / #171C19, hairline #2A332E
-- Display: Instrument Serif 400. UI/body: IBM Plex Mono 400/500
-- One phosphor CTA #C8F542 on #080A09 per view
-- No weight 600+, no gradients on UI, no Inter, no rainbow, no liquid metal
+This brand is: Shizuku running on a ComputerCraft monitor.
+- Pixel fonts only (Pixelify Sans / Monocraft / Unbounded). Sizes 12/16/24/32/48/64.
+- Icons are 16×16 or 32×32, nearest-neighbor. Recreate Minecraft blocks; do not commit Mojang files.
+- Booleans are Material 3 switches (52×32, phosphor ON), in Android Settings preference rows — like Shizuku.
+- Canvas #080A09, phosphor #C8F542, settings radius 24px, icon radius 0.
+- No Inter, no serif, no iOS toggles, no rainbow, no liquid metal.
 
-If you need a component skeleton, take structure from 21st.dev
-(ASCII hero, terminal window, dark compact cards) and restyle
-every color/font/radius to DESIGN.md tokens.
-
-If you need a taste reference, Linear + Monad on styles.refero.design
-are the method, not the palette.</pre>
+Skeletons: 21st.dev ASCII/terminal. Method: Refero DESIGN.md. Controls: AOSP Settings / Shizuku.
+Assets: Minecraft language + internet, with credits, OSI licenses preferred.</pre>
       </section>
 
       <footer class="block">
-        ccLinux brand book · tokens in DESIGN.md · skeletons from 21st.dev · discipline from Refero.<br />
-        Phosphor is a flashlight, not a personality.
+        ccLinux · pixel type · Shizuku levers · 16×16 · GPL energy
       </footer>
     </main>
   </div>
@@ -755,27 +603,34 @@ are the method, not the palette.</pre>
     function ping(t) {
       toast.textContent = t;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1200);
+      setTimeout(() => toast.classList.remove("show"), 1100);
     }
     document.querySelectorAll(".swatch").forEach((el) => {
       el.addEventListener("click", () => {
-        const hex = el.getAttribute("data-hex");
-        navigator.clipboard.writeText(hex).then(() => ping(hex));
+        navigator.clipboard.writeText(el.getAttribute("data-hex")).then(() => ping(el.getAttribute("data-hex")));
       });
     });
     document.getElementById("copy-prompt").addEventListener("click", () => {
-      const text = document.getElementById("agent-prompt").innerText;
-      navigator.clipboard.writeText(text).then(() => ping("prompt copied"));
+      navigator.clipboard.writeText(document.getElementById("agent-prompt").innerText).then(() => ping("prompt copied"));
+    });
+    document.querySelectorAll("[data-toggle]").forEach((row) => {
+      row.addEventListener("click", () => {
+        const sw = row.querySelector(".m3");
+        const on = sw.classList.toggle("on");
+        sw.setAttribute("aria-checked", on ? "true" : "false");
+      });
     });
     const links = [...document.querySelectorAll(".nav-list a")];
-    const map = links.map((a) => [a, document.querySelector(a.getAttribute("href"))]);
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
         links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
       });
     }, { rootMargin: "-40% 0px -50% 0px" });
-    map.forEach(([, el]) => el && io.observe(el));
+    links.forEach((a) => {
+      const el = document.querySelector(a.getAttribute("href"));
+      if (el) io.observe(el);
+    });
   </script>
 </body>
 </html>

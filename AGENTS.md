@@ -4,21 +4,26 @@ You are working on **ccLinux** (`pacmanlinuxcraftos`).
 
 ## Visual identity (mandatory)
 
-Before generating any UI, landing page, docs chrome, README graphic, component, or marketing layout:
+Read [`DESIGN.md`](./DESIGN.md) before any UI.
 
-1. Read [`DESIGN.md`](./DESIGN.md) in full.
-2. Use only those tokens (colors, type, radii, spacing).
-3. Follow the Do / Don't lists. They override generic “make it look modern” instincts.
+Brand in one line: **Shizuku running on a ComputerCraft monitor.**
 
-Paste-ready contract is at the bottom of `DESIGN.md`.
+- Pixel fonts only (Pixelify Sans / Monocraft / Unbounded). Sizes 12 / 16 / 24 / 32 / 48 / 64.
+- Booleans = Material 3 switches (52×32, phosphor when ON) in Android Settings / Shizuku preference rows.
+- Icons = 16×16 or 32×32, `image-rendering: pixelated`. Recreate Minecraft blocks. Do not commit Mojang jar files.
+- Open source: credit, GPL/MIT/Apache. Steal internet assets with a source line.
 
-## Where to steal skeletons (not palettes)
+No Inter, no serif, no iOS toggles, no rainbow, no liquid metal.
 
-- **[21st.dev](https://21st.dev)** — ASCII heroes, terminal windows, dark compact cards. Restyle to our tokens. Never copy rainbow / liquid-metal / gradient buttons.
-- **[Refero Styles](https://styles.refero.design)** — method. Linear = one accent on midnight. Monad = serif display + mono UI. Do not clone their hex values.
+## Steal list
+
+- Controls: AOSP Settings, [Shizuku](https://github.com/RikkaApps/Shizuku)
+- Assets: Minecraft 16×16 language (recreate) + credited internet files
+- Skeletons: [21st.dev](https://21st.dev) ASCII/terminal
+- Method: [Refero Styles](https://styles.refero.design) DESIGN.md — not their palettes
 
 ## Product facts (do not invent)
 
-ccLinux is a GNU/Linux-like **TTY** for CC: Tweaked (ComputerCraft). No GUI. GRUB, kernel, pacman, bash-like shell. Repo code lives in `linux/`, installer is generated via `make build`.
+ccLinux is a GNU/Linux-like **TTY** for CC: Tweaked. No GUI. GRUB, kernel, pacman, bash-like shell. Code in `linux/`. `make build` regenerates `install.lua`.
 
 Human brand book: `brand/index.html`.

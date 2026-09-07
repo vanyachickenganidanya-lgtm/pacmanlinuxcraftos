@@ -1,12 +1,12 @@
 ---
-description: ccLinux visual identity — always apply DESIGN.md
+description: ccLinux visual identity — pixel type, Shizuku switches, 16×16 assets
 globs: **/*.{html,css,scss,js,tsx,jsx,vue,md}
 alwaysApply: true
 ---
 
-Follow `DESIGN.md` at the repo root for any visual work.
+Follow `DESIGN.md`. Brand: Shizuku on a ComputerCraft monitor.
 
-- Canvas `#080A09`, phosphor CTA `#C8F542` once per view
-- Instrument Serif 400 for display; IBM Plex Mono for UI/body
-- No weight 600+, no UI gradients, no Inter, no rainbow, no liquid metal
-- Steal skeletons from 21st.dev (ASCII/terminal) and discipline from Refero Linear/Monad — never their palettes
+- Pixel fonts (Pixelify Sans / Monocraft / Unbounded), sizes 12/16/24/32/48/64
+- Material 3 switches 52×32, phosphor `#C8F542` when ON, preference rows like Android Settings
+- 16×16 icons, nearest-neighbor; recreate Minecraft blocks; no Mojang files in git
+- No Inter, no serif, no iOS toggles, no rainbow, no liquid metal
